@@ -12,5 +12,5 @@ public class GameManager : Singleton<GameManager>
         player = FindObjectOfType<PlayerController>();
         player.Init(this);
     }
-
+    
 }

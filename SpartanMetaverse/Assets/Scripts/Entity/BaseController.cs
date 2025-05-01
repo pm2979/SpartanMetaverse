@@ -19,11 +19,13 @@ public abstract class BaseController : MonoBehaviour
     private float knockbackDuration = 0.0f; // 넉백 시간
 
     protected StatHandler statHandler;
+    protected AnimationHandler animationHandler;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         statHandler = GetComponent<StatHandler>();
+        animationHandler = GetComponent<AnimationHandler>();
     }
 
     protected virtual void Update()
@@ -56,7 +58,8 @@ public abstract class BaseController : MonoBehaviour
             direction += knockback; // 넉백을 적용
         }
 
-        _rigidbody.velocity = direction;
+        _rigidbody.velocity = direction; // 실제 이동 적용
+        animationHandler.Move(direction); // Move 애니메이션
     }
 
     private void Rotate(Vector2 direction) // 회전
