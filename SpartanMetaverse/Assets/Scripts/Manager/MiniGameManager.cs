@@ -9,11 +9,10 @@ public class MiniGameManager : Singleton<MiniGameManager>
 
     protected override void Awake()
     {
-        base.Awake();
-
         uiManager = FindObjectOfType<UIManager>();
 
         Time.timeScale = 0f;
+        //uiManager.SetMiniGameStart(); // StartUI
     }
 
     private void Start()

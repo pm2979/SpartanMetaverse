@@ -30,7 +30,6 @@ public class UIManager : Singleton<UIManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneAwake();
-        //ChangeState(UIState.MiniGameStart);
     }
 
     public void SetMiniGameStart()

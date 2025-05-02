@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highPosY: 1
   lowPosY: -1
-  holeSizeMin: 3
+  holeSizeMin: 4
   holeSizeMax: 5
   topObject: {fileID: 2182472600261724526}
   bottomObject: {fileID: 7332786103871984784}
