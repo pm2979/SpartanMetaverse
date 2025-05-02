@@ -2497,7 +2497,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &1459129266
 MonoBehaviour:
@@ -7594,10 +7594,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1884519245}
   - {fileID: 1563220388}
   - {fileID: 1889702058}
   - {fileID: 1265046733}
-  - {fileID: 1884519245}
   - {fileID: 1645837577}
   m_Father: {fileID: 334885706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
