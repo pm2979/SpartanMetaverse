@@ -30,7 +30,7 @@ public class UIManager : Singleton<UIManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneAwake();
-        ChangeState(UIState.MiniGameStart);
+        //ChangeState(UIState.MiniGameStart);
     }
 
     public void SetMiniGameStart()
@@ -53,7 +53,7 @@ public class UIManager : Singleton<UIManager>
         //miniGameStartUI.UpdateHPSlider(currentHP / maxHP);
     }
 
-    public void ChangeState(UIState state)
+    public void ChangeState(UIState state) // UI 상태 변화로 내가 원하는 UI를 활성화
     {
         currentState = state;
         foreach (var ui in uiList)
@@ -61,7 +61,6 @@ public class UIManager : Singleton<UIManager>
             ui.SetActive(currentState);
         }
     }
-
 
     public void SceneAwake() // Awake에서 해야 할 것들
     {

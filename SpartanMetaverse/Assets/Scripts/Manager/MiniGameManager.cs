@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MiniGameManager : Singleton<MiniGameManager>
 {
-
     UIManager uiManager;
 
     protected override void Awake()
@@ -13,6 +12,7 @@ public class MiniGameManager : Singleton<MiniGameManager>
         base.Awake();
 
         uiManager = FindObjectOfType<UIManager>();
+        uiManager.ChangeState(UIState.MiniGameStart);
 
         Time.timeScale = 0f;
     }
