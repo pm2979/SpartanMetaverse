@@ -17,8 +17,11 @@ public class CameraTracing : MonoBehaviour
     {
         // 초기 거리 설정 (보통 z 축만 -10)
         offset = transform.position - target.position;
-        minBounds = minBoundsObj.transform.position;
-        maxBounds = maxBoundsObj.transform.position;
+
+        if(minBoundsObj != null)
+            minBounds = minBoundsObj.transform.position;
+        if (maxBoundsObj != null)
+            maxBounds = maxBoundsObj.transform.position;
     }
 
     // LateUpdate()를 사용하는 이유는 모든 캐릭터 이동이 끝난 후에 카메라가 따라가는 연출을 만들기 위함
@@ -28,9 +31,13 @@ public class CameraTracing : MonoBehaviour
         Vector3 desiredPosition = target.position + offset;
         desiredPosition.z = transform.position.z;
 
+
         // 위치 제한 적용
-        desiredPosition.x = Mathf.Clamp(desiredPosition.x, minBounds.x, maxBounds.x);
-        desiredPosition.y = Mathf.Clamp(desiredPosition.y, minBounds.y, maxBounds.y);
+        if(maxBoundsObj != null && minBoundsObj != null)
+        {
+            desiredPosition.x = Mathf.Clamp(desiredPosition.x, minBounds.x, maxBounds.x);
+            desiredPosition.y = Mathf.Clamp(desiredPosition.y, minBounds.y, maxBounds.y);
+        }
 
         // 부드럽게 이동
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);

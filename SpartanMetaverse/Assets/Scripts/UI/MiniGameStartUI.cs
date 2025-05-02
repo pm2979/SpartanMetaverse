@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MiniGameStartUI : BaseUI
 {
@@ -9,8 +10,14 @@ public class MiniGameStartUI : BaseUI
         return UIState.MiniGameStart;
     }
 
-    public void OnClickStartButton()
+    public void OnClickGoMiniGame()
     {
         SceneManager.LoadScene(miniGameSceneName, LoadSceneMode.Single); // ¾À ºÒ·¯¿À±â
+    }
+
+    public void OnClickMiniGameStart()
+    {
+        Time.timeScale = 1.0f;
+        this.gameObject.SetActive(false);
     }
 }

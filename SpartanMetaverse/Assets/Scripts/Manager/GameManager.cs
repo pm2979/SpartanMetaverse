@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         player = FindObjectOfType<PlayerController>();
+        if (player != null)
         player.Init(this);
 
         uiManager = GetComponentInChildren<UIManager>();

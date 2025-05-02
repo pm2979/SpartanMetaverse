@@ -22,12 +22,15 @@ public class UIManager : Singleton<UIManager>
         SceneAwake();
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        ChangeState(UIState.Game);
     }
 
     // 씬 로드 후 자동 호출
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneAwake();
+        ChangeState(UIState.MiniGameStart);
     }
 
     public void SetMiniGameStart()
@@ -68,7 +71,5 @@ public class UIManager : Singleton<UIManager>
         {
             ui.Init(this);
         }
-
-        ChangeState(UIState.Game);
     }
 }
