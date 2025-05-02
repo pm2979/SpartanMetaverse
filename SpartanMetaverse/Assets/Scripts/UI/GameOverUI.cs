@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class GameOverUI : BaseUI
 {
-    public void OnClickRestartButton()
+    private string mainScene = "Main";
+
+    public void OnClickMainSceneButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(mainScene, LoadSceneMode.Single); // 메인 씬 불러오기
     }
 
-    public void OnClickExitButton()
+    public void OnClickReStartButton() // 미니게임 재시작 버튼
     {
-        Application.Quit();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 재시작
     }
 
     protected override UIState GetUIState()

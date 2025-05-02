@@ -12,10 +12,22 @@ public class MiniGameManager : Singleton<MiniGameManager>
         base.Awake();
 
         uiManager = FindObjectOfType<UIManager>();
-        uiManager.ChangeState(UIState.MiniGameStart);
 
         Time.timeScale = 0f;
     }
 
+    private void Start()
+    {
+        uiManager.SetMiniGameStart(); // StartUI
+    }
 
+    public void GameOver() // 미니게임 종료
+    {
+        uiManager.SetGameOver();
+    }
+
+    public void RestartGame() // 미니게임 재시작
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 재시작
+    }
 }

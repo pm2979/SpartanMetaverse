@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public enum UIState
 {
-    MiniGameStart,
-    Game,
-    GameOver,
+    MiniGameStart, // 미니게임 시작
+    Game, // 게임 중
+    GameOver, // 게임 오버
 }
 
 public class UIManager : Singleton<UIManager>
@@ -53,7 +53,7 @@ public class UIManager : Singleton<UIManager>
         //miniGameStartUI.UpdateHPSlider(currentHP / maxHP);
     }
 
-    public void ChangeState(UIState state) // UI 상태 변화로 내가 원하는 UI를 활성화
+    private void ChangeState(UIState state) // UI 상태 변화로 내가 원하는 UI를 활성화
     {
         currentState = state;
         foreach (var ui in uiList)
@@ -62,7 +62,7 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public void SceneAwake() // Awake에서 해야 할 것들
+    private void SceneAwake() // Awake에서 해야 할 것들
     {
         uiList = new List<BaseUI>(FindObjectsOfType<BaseUI>(true));
 
