@@ -8,7 +8,7 @@ public class MiniGameTrigger : MonoBehaviour
     {
         if(collision.CompareTag("Player") == true) // 미니게임 시작 UI On
         {
-
+            UIManager.Instance.SetMiniGameStart();
         }
     }
 
@@ -16,7 +16,7 @@ public class MiniGameTrigger : MonoBehaviour
     {
         if (Collision.CompareTag("Player")) // 미니게임 시작 UI Off
         {
-            
+            UIManager.Instance.SetPlayGame();
         }
     }
 }
