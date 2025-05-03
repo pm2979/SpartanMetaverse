@@ -19,6 +19,8 @@ public class Obstacle : MonoBehaviour
 
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstaclCount) //장애물 위치 생성
     {
+        CoinDestroy();
+
         float holeSize = Random.Range(holeSizeMin, holeSizeMax);
         float halfHoleSize = holeSize / 2f;
 
@@ -43,6 +45,18 @@ public class Obstacle : MonoBehaviour
         bottomCoin.transform.localPosition = new Vector2(bottomObject.localPosition.x + 0.1f, bottomObject.localPosition.y + coinPos);
 
         return placePosition;
+    }
+    
+    private void CoinDestroy() // 코인 삭제
+    {
+        CoinController[] _coin = GetComponentsInChildren<CoinController>();
+        if(_coin != null)
+        {
+            foreach(CoinController coin in _coin)
+            {
+                Destroy(coin.gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

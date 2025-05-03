@@ -83,7 +83,8 @@ public class Player : MonoBehaviour
     {
         if (col.CompareTag("Coin")) // 코인 회득 시
         {
-            // 스코어 매니저에서 점수 상승
+            int _coinValue = col.GetComponent<CoinController>().CoinValue;
+            ScoreManager.Instance.AddScore(_coinValue); // 스코어 매니저에서 점수 상승
             Destroy(col.gameObject);
 
         }

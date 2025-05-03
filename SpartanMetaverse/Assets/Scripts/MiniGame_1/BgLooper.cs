@@ -18,8 +18,6 @@ public class BgLooper : MonoBehaviour
         {
             obstacleLastPosition = obstacles[i].SetRandomPlace(obstacleLastPosition, obstacleCount);
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D col)
