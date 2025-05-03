@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : BaseController
 {
-    private Camera _camera;
-    private GameManager gameManager;
+    private int coin;
+    public int Coin { get => coin; set => coin = value; }
 
-    public void Init(GameManager gameManager)
+    private Camera _camera;
+
+    public void Init()
     {
-        this.gameManager = gameManager;
         _camera = Camera.main;
     }
 

@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
 
         player = FindObjectOfType<PlayerController>();
         if (player != null)
-        player.Init(this);
+        player.Init();
 
         uiManager = GetComponentInChildren<UIManager>();
     }

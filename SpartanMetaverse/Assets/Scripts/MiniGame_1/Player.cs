@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     Animator animator;
     Rigidbody2D _rb;
 
-    public float flapForce = 6f;
+    public float flapForce = 1f;
     public float forwardSpeed = 3f;
     public bool isDead = false;
     float deathCooldown = 0f;
@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     bool isFlap = false;
 
     public bool godMode = false;
-
 
     void Start()
     {
@@ -34,7 +33,9 @@ public class Player : MonoBehaviour
     {
         if (!isDead)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            // 키를 누르고 있으면 위로 상승
+            // 아니면 하강
+            if (Input.GetKey(KeyCode.Space))
             {
                 isFlap = true;
             }
@@ -43,10 +44,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDead) return; // 죽으면 return
 
         Vector3 velocity = _rb.velocity;
-        velocity.x = forwardSpeed; // 앞으로 이동
+        velocity.x = forwardSpeed; // 계속 앞으로 이동
 
         if (isFlap)
         {
@@ -67,10 +68,24 @@ public class Player : MonoBehaviour
 
         if (isDead) return;
 
-        isDead = true;
-        deathCooldown = 1f;
+        if(col.gameObject.CompareTag("Obstacle")) //
+        {
+            isDead = true;
+            deathCooldown = 1f;
 
-        animator.SetInteger("IsDie", 1);
-        MiniGameManager.Instance.GameOver();
+            animator.SetInteger("IsDie", 1);
+            MiniGameManager.Instance.GameOver();
+        }
+        Debug.Log("장애물 충돌");
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Coin")) // 코인 회득 시
+        {
+            // 스코어 매니저에서 점수 상승
+            Destroy(col.gameObject);
+
+        }
     }
 }

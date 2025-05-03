@@ -22,25 +22,30 @@ public class BgLooper : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Triggerd: " + collision.name);
+        Debug.Log("Triggerd: " + col.name);
 
-        if (collision.CompareTag("BackGround")) // 배경 재배치
+        if (col.CompareTag("BackGround")) // 배경 재배치
         {
-            float widtOfBgObject = ((BoxCollider2D)collision).size.x; // 배경 사이즈 받아오기
-            Vector3 pos = collision.transform.position;
+            float widtOfBgObject = ((BoxCollider2D)col).size.x; // 배경 사이즈 받아오기
+            Vector3 pos = col.transform.position;
 
             pos.x += widtOfBgObject * numBgCount;
-            collision.transform.position = pos;
+            col.transform.position = pos;
             return;
         }
 
-        Obstacle obstacle = collision.GetComponent<Obstacle>();
+        Obstacle obstacle = col.GetComponent<Obstacle>();
 
         if (obstacle) // 접촉한 물체가 Obstaccle이라면
         {
             obstacleLastPosition = obstacle.SetRandomPlace(obstacleLastPosition, obstacleCount); // 장애물 배치
+        }
+
+        if(col.CompareTag("Coin") == true)
+        {
+            Destroy(col.gameObject);
         }
     }
 }
