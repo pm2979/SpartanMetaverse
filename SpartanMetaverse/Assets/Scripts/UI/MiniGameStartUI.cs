@@ -19,5 +19,6 @@ public class MiniGameStartUI : BaseUI
     {
         Time.timeScale = 1.0f;
         this.gameObject.SetActive(false);
+        UIManager.Instance.SetPlayGame();
     }
 }

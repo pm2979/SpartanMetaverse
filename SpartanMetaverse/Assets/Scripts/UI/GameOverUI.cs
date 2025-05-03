@@ -1,9 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverUI : BaseUI
 {
+    [SerializeField] private TextMeshProUGUI currentScoreText;
+    [SerializeField] private TextMeshProUGUI bestScoreText;
+
     private string mainScene = "Main";
 
     public void OnClickMainSceneButton()

@@ -41,7 +41,7 @@ public class BgLooper : MonoBehaviour
             obstacleLastPosition = obstacle.SetRandomPlace(obstacleLastPosition, obstacleCount); // 장애물 배치
         }
 
-        if(col.CompareTag("Coin") == true)
+        if(col.CompareTag("Coin") == true) // 코인 삭제
         {
             Destroy(col.gameObject);
         }
