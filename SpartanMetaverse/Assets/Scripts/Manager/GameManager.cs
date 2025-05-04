@@ -19,9 +19,4 @@ public class GameManager : Singleton<GameManager>
         uiManager = GetComponentInChildren<UIManager>();
     }
 
-    //public void MiniGameStart()
-    //{
-    //    uiManager.SetMiniGameStart();
-    //}
-
 }

@@ -8,6 +8,7 @@ public class PlayerController : BaseController
     public int Coin { get => coin; set => coin = value; }
 
     private Camera _camera;
+    
 
     public void Init()
     {

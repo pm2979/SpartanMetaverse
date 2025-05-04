@@ -6,7 +6,7 @@ public abstract class BaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField] private SpriteRenderer chracterRenderer;
+    [SerializeField] protected SpriteRenderer chracterRenderer;
 
     protected Vector2 movementDirection = Vector2.zero; // 이동 방향
 
