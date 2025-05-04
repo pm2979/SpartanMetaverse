@@ -4580,10 +4580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c4a8787f140e543baaf89c0628a1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flapForce: 0.5
-  forwardSpeed: 3
   isDead: 0
   godMode: 0
+  flapForce: 0.5
+  forwardSpeed: 3
 --- !u!1 &2637152638709283553
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlayerAppearance : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer { get; private set; }
     string currentKey;
 
     Sprite idleSprite;
 
     void Start()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         // 저장된 스프라이트 키 불러오기
         currentKey = PlayerPrefs.GetString("PlayerSpriteKey", "Default");
         LoadSprites(currentKey);
-        spriteRenderer.sprite = idleSprite;
+        SpriteRenderer.sprite = idleSprite;
     }
 
     void LoadSprites(string key) // 키에 맞는 sprite를 가져온다.
@@ -32,6 +32,6 @@ public class PlayerAppearance : MonoBehaviour
 
         //이미지 변경
         LoadSprites(newKey);
-        spriteRenderer.sprite = idleSprite;
+        SpriteRenderer.sprite = idleSprite;
     }
 }
