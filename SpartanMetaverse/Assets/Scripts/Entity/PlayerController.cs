@@ -8,11 +8,25 @@ public class PlayerController : BaseController
     public int Coin { get => coin; set => coin = value; }
 
     private Camera _camera;
-    
+
+    protected StatHandler statHandler;
 
     public void Init()
     {
         _camera = Camera.main;
+        statHandler = GetComponent<StatHandler>();
+    }
+
+    protected override void Update()
+    {
+        HandleAction();
+        Rotate(lookDirection);
+    }
+
+    protected override void FixedUpdate()
+    {
+        if (chracterRenderer != null)
+            Movement(MovementDirection);
     }
 
     protected override void HandleAction()
@@ -39,4 +53,13 @@ public class PlayerController : BaseController
         }
     }
 
+    protected override void Movement(Vector2 direction) // 이동
+    {
+        direction = direction * statHandler.Speed; // 이동 속도
+
+        _rigidbody.velocity = direction; // 실제 이동 적용
+
+        if (animationHandler != null)
+            animationHandler.Move(direction, AnimatorType.Player); // Move 애니메이션
+    }
 }

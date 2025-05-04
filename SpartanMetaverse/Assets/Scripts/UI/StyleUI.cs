@@ -31,7 +31,6 @@ public class StyleUI : BaseUI
     public void OnClickSkinChange(TextMeshProUGUI texts)
     {
         playerAppearance.ChangeAppearance(texts.text.ToString());
-        playerImg.sprite = playerAppearance.SpriteRenderer.sprite;
     }
 
     public void OnClickExit()

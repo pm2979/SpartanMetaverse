@@ -2,14 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MiniGameController
+public class Player : BaseController
 {
     public float flapForce = 1f;
     public float forwardSpeed = 3f;
 
     bool isFlap = false;
 
-    void Update()
+    float deathCooldown = 0f;
+    public bool isDead = false;
+    public bool godMode = false;
+
+    private void Start()
+    {
+        chracterRenderer.gameObject.transform.localPosition = new Vector3(0, 0.6f, 0);
+        chracterRenderer.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+    }
+
+    protected override void Update()
     {
         if (!isDead)
         {
@@ -22,11 +32,16 @@ public class Player : MiniGameController
         }
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if (isDead) return; // 죽으면 return
 
-        Vector3 velocity = _rb.velocity;
+        Movement(_rigidbody.velocity);
+    }
+
+    protected override void Movement(Vector2 direction)
+    {
+        Vector2 velocity = direction;
         velocity.x = forwardSpeed; // 계속 앞으로 이동
 
         if (isFlap)
@@ -35,9 +50,37 @@ public class Player : MiniGameController
             isFlap = false;
         }
 
-        _rb.velocity = velocity; // 구조체이기 때문에 값을 넣어준다.
+        _rigidbody.velocity = velocity; // 구조체이기 때문에 값을 넣어준다.
 
-        float angle = Mathf.Clamp(_rb.velocity.y * 10f, -90, 90); // angle의 최소치와 최대치를 정한다
+        float angle = Mathf.Clamp(_rigidbody.velocity.y * 10f, -90, 90); // angle의 최소치와 최대치를 정한다
         transform.rotation = Quaternion.Euler(0, 0, angle); // z축 회전
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D col) // 충돌
+    {
+        if (godMode) return;
+
+        if (isDead) return;
+
+        if (col.gameObject.CompareTag("Obstacle"))
+        {
+            isDead = true;
+            deathCooldown = 1f;
+
+            animationHandler.Die(AnimatorType.Vehcle);
+            animationHandler.Damage();
+            MiniGameManager.Instance.GameOver();
+        }
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Coin")) // 코인 회득 시
+        {
+            int _coinValue = col.GetComponent<CoinController>().CoinValue;
+            ScoreManager.Instance.AddScore(_coinValue); // 스코어 매니저에서 점수 상승
+            Destroy(col.gameObject);
+
+        }
     }
 }

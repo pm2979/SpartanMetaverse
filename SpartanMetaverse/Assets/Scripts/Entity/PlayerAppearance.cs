@@ -4,34 +4,43 @@ using UnityEngine;
 
 public class PlayerAppearance : MonoBehaviour
 {
-    public SpriteRenderer SpriteRenderer { get; private set; }
+    BaseController playerController;
+    AnimationHandler animationHandler;
+
     string currentKey;
+    [SerializeField] private GameObject playerPrefab;
 
-    Sprite idleSprite;
-
-    void Start()
+    private void Awake()
     {
-        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        playerController = GetComponent<BaseController>();
+        animationHandler = GetComponent<AnimationHandler>();
 
-        // 저장된 스프라이트 키 불러오기
+        // 저장된 프리팹 키 불러오기
         currentKey = PlayerPrefs.GetString("PlayerSpriteKey", "Default");
-        LoadSprites(currentKey);
-        SpriteRenderer.sprite = idleSprite;
+        LoadPrefab(currentKey);
     }
 
-    void LoadSprites(string key) // 키에 맞는 sprite를 가져온다.
+
+    void LoadPrefab(string key) // 키에 맞는 프리팹를 가져온다.
     {
-        idleSprite = Resources.Load<Sprite>($"Sprites/{key}");
+        if (playerController.chracterRenderer != null) // null이 아니라면 이전 프리팹 삭제
+            Destroy(playerController.chracterRenderer.gameObject);
+
+        playerPrefab = Resources.Load<GameObject>($"Prefabs/{key}");
+        GameObject _playerPrefab = Instantiate(playerPrefab);
+        _playerPrefab.transform.SetParent(transform, worldPositionStays: false);
+
+        playerController.chracterRenderer = _playerPrefab.GetComponent<SpriteRenderer>(); // 프리팹의 SpriteRenderer 할당
+        animationHandler.animator = _playerPrefab.GetComponent<Animator>(); // 프리팹의 Animator 할당
     }
 
-    public void ChangeAppearance(string newKey) // 플레이어 이미지 변경 시 호출
+    public void ChangeAppearance(string newKey) // 플레이어 프리팹 변경 시 호출
     {
         // 새로운 키 저장
         PlayerPrefs.SetString("PlayerSpriteKey", newKey);
         PlayerPrefs.Save();
 
         //이미지 변경
-        LoadSprites(newKey);
-        SpriteRenderer.sprite = idleSprite;
+        LoadPrefab(newKey);
     }
 }
