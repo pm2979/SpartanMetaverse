@@ -59,7 +59,7 @@ public abstract class BaseController : MonoBehaviour
         }
 
         _rigidbody.velocity = direction; // 실제 이동 적용
-        animationHandler.Move(direction); // Move 애니메이션
+        animationHandler.Move(direction, AnimatorType.Player); // Move 애니메이션
     }
 
     private void Rotate(Vector2 direction) // 회전
