@@ -13,7 +13,7 @@ public class PlayerAppearance : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        // 저장된 키 불러오기
+        // 저장된 스프라이트 키 불러오기
         currentKey = PlayerPrefs.GetString("PlayerSpriteKey", "Default");
         LoadSprites(currentKey);
         spriteRenderer.sprite = idleSprite;
