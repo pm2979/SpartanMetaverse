@@ -8,6 +8,7 @@ public enum UIState
     MiniGameStart, // 미니게임 시작
     Game, // 게임 중
     GameOver, // 게임 오버
+    Style // 꾸미기
 }
 
 public class UIManager : Singleton<UIManager>
@@ -52,7 +53,7 @@ public class UIManager : Singleton<UIManager>
         //miniGameStartUI.UpdateHPSlider(currentHP / maxHP);
     }
 
-    private void ChangeState(UIState state) // UI 상태 변화로 내가 원하는 UI를 활성화
+    public void ChangeState(UIState state) // UI 상태 변화로 내가 원하는 UI를 활성화
     {
         currentState = state;
         foreach (var ui in uiList)
