@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class PlayerController : BaseController
 {
+    [SerializeField] private int moveSpeed = 3;
+    [SerializeField] private int ridingSpeed = 5;
     private int coin;
     public int Coin { get => coin; set => coin = value; }
 
     private Camera _camera;
-
     private StatHandler statHandler;
 
     public void Init()
@@ -29,11 +30,16 @@ public class PlayerController : BaseController
             {
                 ridingController.VehicleOn();
                 ridingController.VehicleScaleUp();
+
                 chracterRenderer.transform.localPosition = new Vector3(0, 1);
+                statHandler.Speed = ridingSpeed;
             }
             else // Å¾½Â off
             {
                 ridingController.VehicleOff();
+
+                chracterRenderer.transform.localPosition = new Vector3(0, 0.4f);
+                statHandler.Speed = moveSpeed;
             }
         }
     }

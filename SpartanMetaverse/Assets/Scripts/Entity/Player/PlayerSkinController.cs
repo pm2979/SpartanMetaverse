@@ -20,7 +20,6 @@ public class PlayerSkinController : MonoBehaviour
         LoadPrefab(currentKey);
     }
 
-
     void LoadPrefab(string key) // 키에 맞는 프리팹를 가져온다.
     {
         if (playerController.chracterRenderer != null) // null이 아니라면 이전 프리팹 삭제

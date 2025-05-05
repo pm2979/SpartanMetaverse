@@ -55,5 +55,12 @@ public class RidingController : MonoBehaviour
     public void VehicleOff() // Å»°Í off
     {
         Destroy(vehicleObj);
+        IsRide = false;
+    }
+
+    public void VehicleRotate(bool isLeft)
+    {
+        if(vehicleObj != null)
+        vehicleObj.GetComponent<SpriteRenderer>().flipX = isLeft;
     }
 }

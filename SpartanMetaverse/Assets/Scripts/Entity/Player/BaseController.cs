@@ -48,5 +48,10 @@ public abstract class BaseController : MonoBehaviour
         bool isLeft = Mathf.Abs(rotZ) > 90f; // 왼쪽 오른쪽 확인
 
         chracterRenderer.flipX = isLeft; // 스프라이트 좌우 반전
+
+        if(ridingController.IsRide == true)
+        {
+            ridingController.VehicleRotate(isLeft);
+        }
     }
 }
