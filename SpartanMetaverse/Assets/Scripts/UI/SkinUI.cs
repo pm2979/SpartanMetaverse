@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class StyleUI : BaseUI
+public class SkinUI : BaseUI
 {
     [SerializeField] private Image playerImg;
 
-    private PlayerAppearance playerAppearance;
+    private PlayerSkinController playerAppearance;
     string currentKey;
 
     public override void Init(UIManager uiManager)
@@ -20,17 +20,17 @@ public class StyleUI : BaseUI
 
     protected override UIState GetUIState()
     {
-        return UIState.Style;
+        return UIState.Skin;
     }
 
-    public void SetPlayerAppearance(PlayerAppearance playerAppearance)
+    public void SetPlayerAppearance(PlayerSkinController playerAppearance)
     {
         this.playerAppearance = playerAppearance;
     }
 
     public void OnClickSkinChange(TextMeshProUGUI texts)
     {
-        playerAppearance.ChangeAppearance(texts.text.ToString());
+        playerAppearance.ChangeSkin(texts.text.ToString());
     }
 
     public void OnClickExit()

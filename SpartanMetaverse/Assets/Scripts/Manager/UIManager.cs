@@ -8,7 +8,9 @@ public enum UIState
     MiniGameStart, // 미니게임 시작
     Game, // 게임 중
     GameOver, // 게임 오버
-    Style // 꾸미기
+    Skin, // 스킨 변경
+    Vehicle, // 탈것
+    Color, // 색 변경
 }
 
 public class UIManager : Singleton<UIManager>

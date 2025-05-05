@@ -8,26 +8,27 @@ public class AnimationHandler : MonoBehaviour
     private static readonly int IsDamage = UnityEngine.Animator.StringToHash("IsDamage");
     private static readonly int IsDie = UnityEngine.Animator.StringToHash("IsDie");
 
-    public Animator animator;
+    public Animator playerAnimator;
+    public Animator vehicleAnimator;
 
     public void Move(Vector2 obj, AnimatorType animatorType)
     {
-        animator.SetBool(IsMoving, obj.magnitude > .5f); // 이동 벡터의 크기를 이용해서 bool 값 반환
+        playerAnimator.SetBool(IsMoving, obj.magnitude > .5f); // 이동 벡터의 크기를 이용해서 bool 값 반환
     }
 
     public void Die(AnimatorType animatorType)
     {
-        //animator.SetInteger(IsDie, 1);
+        vehicleAnimator.SetInteger(IsDie, 1);
     }
 
     public void Damage()
     {
-        animator.SetBool(IsDamage, true); // 피격 애니메이션
+        playerAnimator.SetBool(IsDamage, true); // 피격 애니메이션
     }
 
     public void InvincibilityEnd() // 무적이 끝나는 시간
     {
-        animator.SetBool(IsDamage, false);
+        playerAnimator.SetBool(IsDamage, false);
     }
 }
 

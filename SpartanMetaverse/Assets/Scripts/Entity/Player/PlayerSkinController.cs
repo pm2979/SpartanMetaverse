@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAppearance : MonoBehaviour
+public class PlayerSkinController : MonoBehaviour
 {
     BaseController playerController;
     AnimationHandler animationHandler;
@@ -16,7 +16,7 @@ public class PlayerAppearance : MonoBehaviour
         animationHandler = GetComponent<AnimationHandler>();
 
         // 저장된 프리팹 키 불러오기
-        currentKey = PlayerPrefs.GetString("PlayerSpriteKey", "Default");
+        currentKey = PlayerPrefs.GetString("PlayerPrefabKey", "Default");
         LoadPrefab(currentKey);
     }
 
@@ -31,13 +31,13 @@ public class PlayerAppearance : MonoBehaviour
         _playerPrefab.transform.SetParent(transform, worldPositionStays: false);
 
         playerController.chracterRenderer = _playerPrefab.GetComponent<SpriteRenderer>(); // 프리팹의 SpriteRenderer 할당
-        animationHandler.animator = _playerPrefab.GetComponent<Animator>(); // 프리팹의 Animator 할당
+        animationHandler.playerAnimator = _playerPrefab.GetComponent<Animator>(); // 프리팹의 Animator 할당
     }
 
-    public void ChangeAppearance(string newKey) // 플레이어 프리팹 변경 시 호출
+    public void ChangeSkin(string newKey) // 플레이어 프리팹 변경 시 호출
     {
         // 새로운 키 저장
-        PlayerPrefs.SetString("PlayerSpriteKey", newKey);
+        PlayerPrefs.SetString("PlayerPrefabKey", newKey);
         PlayerPrefs.Save();
 
         //이미지 변경

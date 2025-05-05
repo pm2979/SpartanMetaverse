@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerController : BaseController
@@ -9,7 +10,7 @@ public class PlayerController : BaseController
 
     private Camera _camera;
 
-    protected StatHandler statHandler;
+    private StatHandler statHandler;
 
     public void Init()
     {
@@ -21,6 +22,20 @@ public class PlayerController : BaseController
     {
         HandleAction();
         Rotate(lookDirection);
+
+        if (Input.GetKeyDown(KeyCode.V)) // Å¾½Â Å°
+        {
+            if (ridingController.IsRide == false) // Å¾½Â on
+            {
+                ridingController.VehicleOn();
+                ridingController.VehicleScaleUp();
+                chracterRenderer.transform.localPosition = new Vector3(0, 1);
+            }
+            else // Å¾½Â off
+            {
+                ridingController.VehicleOff();
+            }
+        }
     }
 
     protected override void FixedUpdate()

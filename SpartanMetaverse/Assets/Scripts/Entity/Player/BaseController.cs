@@ -6,7 +6,7 @@ public abstract class BaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField] public SpriteRenderer chracterRenderer;
+    public SpriteRenderer chracterRenderer;
 
     protected Vector2 movementDirection = Vector2.zero; // 이동 방향
 
@@ -15,11 +15,13 @@ public abstract class BaseController : MonoBehaviour
     protected Vector2 lookDirection = Vector2.zero; // 바라보는 방향
     public Vector2 LookDirection { get { return lookDirection; } }
     protected AnimationHandler animationHandler;
+    protected RidingController ridingController;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
+        ridingController = GetComponent<RidingController>();
     }
 
     protected virtual void Update()
