@@ -7,15 +7,15 @@ public class SkinUI : BaseUI
 {
     [SerializeField] private Image playerImg;
 
-    private PlayerSkinController playerAppearance;
+    private PlayerSkinController playerSkinController;
     string currentKey;
 
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
 
-        currentKey = PlayerPrefs.GetString("PlayerSpriteKey", "Default");
-        playerImg.sprite = Resources.Load<Sprite>($"Sprites/{currentKey}");
+        currentKey = PlayerPrefs.GetString("PlayerPrefabKey", "Default");
+        playerImg.sprite = Resources.Load<GameObject>($"Prefabs/{currentKey}").GetComponent<SpriteRenderer>().sprite;
     }
 
     protected override UIState GetUIState()
@@ -23,14 +23,14 @@ public class SkinUI : BaseUI
         return UIState.Skin;
     }
 
-    public void SetPlayerAppearance(PlayerSkinController playerAppearance)
+    public void SetPlayerSkinController(PlayerSkinController playerSkinController)
     {
-        this.playerAppearance = playerAppearance;
+        this.playerSkinController = playerSkinController;
     }
 
     public void OnClickSkinChange(TextMeshProUGUI texts)
     {
-        playerAppearance.ChangeSkin(texts.text.ToString());
+        playerImg.sprite = playerSkinController.ChangeSkin(texts.text.ToString());  
     }
 
     public void OnClickExit()

@@ -20,7 +20,7 @@ public class PlayerSkinController : MonoBehaviour
         LoadPrefab(currentKey);
     }
 
-    void LoadPrefab(string key) // 키에 맞는 프리팹를 가져온다.
+    Sprite LoadPrefab(string key) // 키에 맞는 프리팹를 가져온다.
     {
         if (playerController.chracterRenderer != null) // null이 아니라면 이전 프리팹 삭제
             Destroy(playerController.chracterRenderer.gameObject);
@@ -31,15 +31,17 @@ public class PlayerSkinController : MonoBehaviour
 
         playerController.chracterRenderer = _playerPrefab.GetComponent<SpriteRenderer>(); // 프리팹의 SpriteRenderer 할당
         animationHandler.playerAnimator = _playerPrefab.GetComponent<Animator>(); // 프리팹의 Animator 할당
+
+        return _playerPrefab.GetComponent<SpriteRenderer>().sprite;
     }
 
-    public void ChangeSkin(string newKey) // 플레이어 프리팹 변경 시 호출
+    public Sprite ChangeSkin(string newKey) // 플레이어 프리팹 변경 시 호출
     {
         // 새로운 키 저장
         PlayerPrefs.SetString("PlayerPrefabKey", newKey);
         PlayerPrefs.Save();
 
         //이미지 변경
-        LoadPrefab(newKey);
+        return LoadPrefab(newKey);
     }
 }

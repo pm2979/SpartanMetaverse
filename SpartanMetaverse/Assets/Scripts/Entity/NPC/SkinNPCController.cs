@@ -31,7 +31,7 @@ public class SkinNPCController : MonoBehaviour, INPCInteraction
         if (playerAppearance != null && Input.GetKeyDown(KeyCode.F))
         {
             Interact();
-            skinUI.SetPlayerAppearance(playerAppearance);
+            skinUI.SetPlayerSkinController(playerAppearance);
         }
     }
 

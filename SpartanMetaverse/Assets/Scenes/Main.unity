@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Knight
+  m_text: Red
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1138,7 +1138,7 @@ GameObject:
   - component: {fileID: 395118164}
   - component: {fileID: 395118163}
   m_Layer: 5
-  m_Name: KnightSkinBtn
+  m_Name: RedSkinBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6248432, g: 1, b: 0.2980392, a: 1}
+  m_Color: {r: 1, g: 0.31018943, b: 0.2980392, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2190,7 +2190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8508241, g: 1, b: 0.7688679, a: 1}
+  m_Color: {r: 0.76862746, g: 0.99589056, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2796,7 +2796,7 @@ GameObject:
   - component: {fileID: 1115383502}
   - component: {fileID: 1115383501}
   m_Layer: 5
-  m_Name: PlayerImg
+  m_Name: VehicleImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2909,6 +2909,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chracterRenderer: {fileID: 0}
+  moveSpeed: 3
+  ridingSpeed: 5
 --- !u!61 &1146639551
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225,7 +3227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Elf
+  m_text: Green
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5773,7 +5775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiState: 3
-  skinUI: {fileID: 0}
+  skinUI: {fileID: 1370805915}
 --- !u!1 &1558924787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5787,7 +5789,7 @@ GameObject:
   - component: {fileID: 1558924790}
   - component: {fileID: 1558924789}
   m_Layer: 5
-  m_Name: ElfSkinBtn
+  m_Name: GreenSkinBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11594,6 +11596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589e9b5ff44d26e4ea35f2da1dcadfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vehicleImg: {fileID: 0}
 --- !u!224 &1820052832
 RectTransform:
   m_ObjectHideFlags: 0

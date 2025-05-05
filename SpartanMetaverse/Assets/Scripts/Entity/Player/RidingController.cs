@@ -40,10 +40,14 @@ public class RidingController : MonoBehaviour
         PlayerPrefs.SetString("VehiclePrefabKey", newKey);
         PlayerPrefs.Save();
 
-        if(IsRide == true) // 타는 중이라면
+        // 새로운 프리팹으로 변경
+        vehiclePrefab = Resources.Load<GameObject>($"Prefabs/Vehicle/{newKey}");
+
+        if (IsRide == true) // 타는 중이라면
         {
             VehicleOff();
             VehicleOn();
+            VehicleScaleUp();
         }
     }
 
@@ -58,7 +62,7 @@ public class RidingController : MonoBehaviour
         IsRide = false;
     }
 
-    public void VehicleRotate(bool isLeft)
+    public void VehicleRotate(bool isLeft) // 탈것 좌우 변경
     {
         if(vehicleObj != null)
         vehicleObj.GetComponent<SpriteRenderer>().flipX = isLeft;

@@ -17,6 +17,8 @@ public class Player : BaseController
     {
         chracterRenderer.gameObject.transform.localPosition = new Vector3(0, 0.6f, 0);
         chracterRenderer.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+
+        ridingController.VehicleOn();
     }
 
     protected override void Update()

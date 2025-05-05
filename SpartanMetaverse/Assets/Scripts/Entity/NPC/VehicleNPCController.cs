@@ -9,13 +9,13 @@ public class VehicleNPCController : MonoBehaviour
 
     [SerializeField] private VehicleUI vehicleUI;
 
-    private PlayerSkinController playerAppearance;
+    private RidingController ridingController;
 
     public void OnTriggerEnter2D(Collider2D col) // 상호작용 영역 안
     {
         if (col.CompareTag("Player"))
         {
-            playerAppearance = col.GetComponent<PlayerSkinController>();
+            ridingController = col.GetComponent<RidingController>();
         }
     }
 
@@ -23,17 +23,17 @@ public class VehicleNPCController : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            playerAppearance = null;
+            ridingController = null;
             UIManager.Instance.SetPlayGame();
         }
     }
 
     public void Update()
     {
-        if (playerAppearance != null && Input.GetKeyDown(KeyCode.F))
+        if (ridingController != null && Input.GetKeyDown(KeyCode.F))
         {
             Interact();
-            //vehicleUI.SetPlayerAppearance(playerAppearance);
+            vehicleUI.SetRidingController(ridingController);
         }
     }
 
