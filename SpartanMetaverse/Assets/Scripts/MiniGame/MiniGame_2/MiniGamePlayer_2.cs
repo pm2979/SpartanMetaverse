@@ -1,63 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
-public class PlayerController : BaseController
+public class MiniGamePlayer_2 : BaseController
 {
-    [SerializeField] private int moveSpeed = 3;
-    [SerializeField] private int ridingSpeed = 5;
-    private int coin;
-    public int Coin { get => coin; set => coin = value; }
-
     private Camera _camera;
     private StatHandler statHandler;
+    bool isJump = false;
 
-    public void Init()
+    float deathCooldown = 0f;
+    public bool isDead = false;
+
+    protected override void Awake()
     {
+        base.Awake();
+
         _camera = Camera.main;
         statHandler = GetComponent<StatHandler>();
+        rb.sharedMaterial = new PhysicsMaterial2D { bounciness = 1f, friction = 0f };
     }
 
     protected override void Update()
     {
-        HandleAction();
-        Rotate(lookDirection);
-
-        if (Input.GetKeyDown(KeyCode.V)) // 탑승 키
+        if (!isDead)
         {
-            if (ridingController.IsRide == false) // 탑승 on
-            {
-                ridingController.VehicleOn();
-                ridingController.VehicleScaleUp();
-
-                chracterRenderer.transform.localPosition = new Vector3(0, 1);
-                statHandler.Speed = ridingSpeed;
-            }
-            else // 탑승 off
-            {
-                ridingController.VehicleOff();
-
-                chracterRenderer.transform.localPosition = new Vector3(0, 0.4f);
-                statHandler.Speed = moveSpeed;
-            }
+            HandleAction();
+            Rotate(lookDirection);
         }
     }
 
     protected override void FixedUpdate()
     {
-        if (chracterRenderer != null)
+        if (chracterRenderer != null && isJump == true)
+        {
             Movement(MovementDirection);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Jump();
+            }
+        }
     }
 
     protected override void HandleAction()
     {
         // 입력된 값 가져오기
         float horizontal = Input.GetAxisRaw("Horizontal"); //  A 와 D
-        float vertical = Input.GetAxisRaw("Vertical"); // S 와 W
 
         // 방향 벡터를 일정한 값으로
-        movementDirection = new Vector2(horizontal, vertical).normalized;
+        movementDirection = new Vector2(horizontal, 0).normalized;
 
         Vector2 mousePosition = Input.mousePosition;
         Vector2 worldPos = _camera.ScreenToWorldPoint(mousePosition);
@@ -82,5 +73,36 @@ public class PlayerController : BaseController
 
         if (animationHandler != null)
             animationHandler.Move(direction, AnimatorType.Player); // Move 애니메이션
+    }
+
+    private void Jump()
+    {
+        if (isJump == true)
+        {
+            rb.velocity = Vector2.up * 5;
+
+            isJump = false;
+        }
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D col)
+    {
+        if (isDead) return;
+
+        base.OnTriggerEnter2D(col);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (isDead)
+        {
+            isJump = false;
+            return;
+        }
+
+        if (col.gameObject.CompareTag("Ground") && isJump == false)
+        {
+            isJump = true;
+        }
     }
 }

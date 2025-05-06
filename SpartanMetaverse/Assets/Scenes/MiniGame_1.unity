@@ -411,7 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6313cf2e1b8a441a3b9769f3d4199a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameSceneName: MiniGame_1
 --- !u!4 &337395845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5296844140553433999, guid: bf00db9c22f48de44b984ca7e3c3bc65, type: 3}
@@ -4395,23 +4394,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2636645839921345990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4365577409835311335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c4a8787f140e543baaf89c0628a1ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chracterRenderer: {fileID: 0}
-  flapForce: 0.5
-  forwardSpeed: 3
-  isDead: 0
-  godMode: 0
 --- !u!1 &2637152638709283553
 GameObject:
   m_ObjectHideFlags: 0
@@ -4903,7 +4885,7 @@ GameObject:
   - component: {fileID: 3895533577968168880}
   - component: {fileID: 1464214156648261288}
   - component: {fileID: 4962655886343302961}
-  - component: {fileID: 2636645839921345990}
+  - component: {fileID: 4962655886343302964}
   - component: {fileID: 4962655886343302963}
   - component: {fileID: 4962655886343302960}
   - component: {fileID: 4962655886343302962}
@@ -5237,6 +5219,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18aa1f4f3da6d6c47a45d79e4b121139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4962655886343302964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4365577409835311335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfa686839809f640a8223b33a6bcd65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chracterRenderer: {fileID: 0}
+  flapForce: 1
+  forwardSpeed: 3
+  isDead: 0
+  godMode: 0
 --- !u!1 &5026438327590140299
 GameObject:
   m_ObjectHideFlags: 0

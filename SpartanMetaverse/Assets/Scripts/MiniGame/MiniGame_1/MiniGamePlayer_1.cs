@@ -38,7 +38,7 @@ public class MiniGamePlayer_1 : BaseController
     {
         if (isDead) return; // 죽으면 return
 
-        Movement(_rigidbody.velocity);
+        Movement(rb.velocity);
     }
 
     protected override void Movement(Vector2 direction)
@@ -52,17 +52,19 @@ public class MiniGamePlayer_1 : BaseController
             isFlap = false;
         }
 
-        _rigidbody.velocity = velocity; // 구조체이기 때문에 값을 넣어준다.
+        rb.velocity = velocity; // 구조체이기 때문에 값을 넣어준다.
 
-        float angle = Mathf.Clamp(_rigidbody.velocity.y * 10f, -90, 90); // angle의 최소치와 최대치를 정한다
+        float angle = Mathf.Clamp(rb.velocity.y * 10f, -90, 90); // angle의 최소치와 최대치를 정한다
         transform.rotation = Quaternion.Euler(0, 0, angle); // z축 회전
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D col) // 충돌
+    protected override void OnTriggerEnter2D(Collider2D col)
     {
         if (godMode) return;
 
         if (isDead) return;
+
+        base.OnTriggerEnter2D(col);
 
         if (col.gameObject.CompareTag("Obstacle"))
         {
@@ -75,14 +77,4 @@ public class MiniGamePlayer_1 : BaseController
         }
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.CompareTag("Coin")) // 코인 회득 시
-        {
-            int _coinValue = col.GetComponent<CoinController>().CoinValue;
-            ScoreManager.Instance.AddScore(_coinValue); // 스코어 매니저에서 점수 상승
-            Destroy(col.gameObject);
-
-        }
-    }
 }

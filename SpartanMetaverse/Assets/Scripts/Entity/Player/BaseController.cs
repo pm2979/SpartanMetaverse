@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseController : MonoBehaviour
 {
-    protected Rigidbody2D _rigidbody;
+    protected Rigidbody2D rb;
 
     public SpriteRenderer chracterRenderer;
 
@@ -19,7 +19,7 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
         ridingController = GetComponent<RidingController>();
     }
@@ -52,6 +52,17 @@ public abstract class BaseController : MonoBehaviour
         if(ridingController.IsRide == true)
         {
             ridingController.VehicleRotate(isLeft);
+        }
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Coin")) // 코인 회득 시
+        {
+            int _coinValue = col.GetComponent<CoinController>().CoinValue;
+            ScoreManager.Instance.AddScore(_coinValue); // 스코어 매니저에서 점수 상승
+            Destroy(col.gameObject);
+
         }
     }
 }
