@@ -9,7 +9,7 @@ public class BlockBase : MonoBehaviour
 
     public void TakeDamage()
     {
-        coin.GetComponent<Rigidbody2D>().gravityScale = 1;
+        coin.GetComponent<Rigidbody2D>().gravityScale = 0.1f;
         
         hp -= 1;
 
