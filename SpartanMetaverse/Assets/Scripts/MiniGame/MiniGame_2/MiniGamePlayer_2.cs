@@ -11,13 +11,16 @@ public class MiniGamePlayer_2 : BaseController
     float deathCooldown = 0f;
     public bool isDead = false;
 
+    private Vector3 playerPos;
+
     protected override void Awake()
     {
         base.Awake();
 
         _camera = Camera.main;
         statHandler = GetComponent<StatHandler>();
-        rb.sharedMaterial = new PhysicsMaterial2D { bounciness = 1f, friction = 0f };
+
+        playerPos = transform.position;
     }
 
     protected override void Update()
@@ -31,11 +34,11 @@ public class MiniGamePlayer_2 : BaseController
 
     protected override void FixedUpdate()
     {
-        if (chracterRenderer != null && isJump == true)
+        if (chracterRenderer != null)
         {
             Movement(MovementDirection);
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && isJump == true)
             {
                 Jump();
             }
@@ -67,9 +70,10 @@ public class MiniGamePlayer_2 : BaseController
 
     protected override void Movement(Vector2 direction) // 이동
     {
-        direction = direction * statHandler.Speed; // 이동 속도
+        playerPos.x += direction.x * statHandler.Speed * Time.deltaTime; // 이동 속도
+        playerPos.x = Mathf.Clamp(playerPos.x, -3.4f, 3.4f);
 
-        rb.velocity = direction; // 실제 이동 적용
+        transform.position = playerPos;
 
         if (animationHandler != null)
             animationHandler.Move(direction, AnimatorType.Player); // Move 애니메이션

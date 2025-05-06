@@ -4,45 +4,51 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float speed = 5f;
+    public float ballSpeed = 5f;
+
+    private Vector2 ballDirection; // 공 이동 방향
 
     private Rigidbody2D rb;
-    private CircleCollider2D cc;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        cc = GetComponent<CircleCollider2D>();
         rb.gravityScale = 0f;
 
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
-        // 2) 물리 재질 설정
-        var mat = new PhysicsMaterial2D { bounciness = 1f, friction = 0f };
-        cc.sharedMaterial = mat;
-
-        // rb.sharedMaterial은 이 리지드바디가 공유해서 쓰는 물리 재질
-        // Physics Material 2D 에셋을 연결하는 대신, 코드를 통해 런타임에 즉시 새 재질을 할당
-        // bounciness = 1f > 완전 탕성 충돌
-        // friction = 0f > 마찰력 0
     }
 
     private void Start()
     {
-        Launch();
+        ballDirection = Vector2.up.normalized; // 공의 초기 이동 방향
     }
 
-    private void Launch()
+    private void Update()
     {
-        float angle = Random.Range(-45f, 45f) * Mathf.Deg2Rad;
-        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-        rb.velocity = direction * speed;
+        transform.Translate(ballDirection * ballSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        ContactPoint2D contact = collision.contacts[0];
-        Vector2 reflected = Vector2.Reflect(rb.velocity.normalized, contact.normal);
-        rb.velocity = reflected * speed;
+        if(col.gameObject.CompareTag("Wall"))
+        {
+            ballDirection = Vector2.Reflect(ballDirection, col.contacts[0].normal);
+        }
+        else if(col.gameObject.CompareTag("Player"))
+        {
+            float hitPoint = col.contacts[0].point.x;
+            float paddleCenter = col.transform.position.x;
+            float angle = (hitPoint - paddleCenter) * 2.0f;
+
+            ballDirection = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)).normalized;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Block"))
+        {
+            col.gameObject.GetComponent<BlockBase>().TakeDamage();
+        }
     }
 }

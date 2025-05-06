@@ -8,6 +8,8 @@ TagManager:
   - Coin
   - Obstacle
   - Ground
+  - Wall
+  - Block
   layers:
   - Default
   - TransparentFX
