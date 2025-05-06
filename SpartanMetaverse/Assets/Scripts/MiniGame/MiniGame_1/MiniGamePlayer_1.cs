@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : BaseController
+public class MiniGamePlayer_1 : BaseController
 {
     public float flapForce = 1f;
     public float forwardSpeed = 3f;

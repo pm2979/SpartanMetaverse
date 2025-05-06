@@ -61,7 +61,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Player player = collision.GetComponent<Player>();
+        MiniGamePlayer_1 player = collision.GetComponent<MiniGamePlayer_1>();
 
         if (player != null)
         {

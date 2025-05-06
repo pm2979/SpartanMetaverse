@@ -4,13 +4,12 @@ using UnityEngine.UI;
 
 public class MiniGameStartUI : BaseUI
 {
-    public string miniGameSceneName = "MinGame_1";
     protected override UIState GetUIState()
     {
         return UIState.MiniGameStart;
     }
 
-    public void OnClickGoMiniGame()
+    public void OnClickGoMiniGame(string miniGameSceneName)
     {
         SceneManager.LoadScene(miniGameSceneName, LoadSceneMode.Single); // ¾À ºÒ·¯¿À±â
     }
