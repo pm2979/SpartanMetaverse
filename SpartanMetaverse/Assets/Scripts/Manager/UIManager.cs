@@ -11,6 +11,7 @@ public enum UIState
     Skin, // 스킨 변경
     Vehicle, // 탈것
     Color, // 색 변경
+    LeaderBoard, // 리더보드
 }
 
 public class UIManager : Singleton<UIManager>
@@ -33,6 +34,11 @@ public class UIManager : Singleton<UIManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneAwake();
+    }
+
+    public void SetLeaderBoard()
+    {
+        ChangeState(UIState.LeaderBoard);
     }
 
     public void SetMiniGameStart()

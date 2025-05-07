@@ -58,13 +58,12 @@ public class MiniGamePlayer_1 : BaseController
         transform.rotation = Quaternion.Euler(0, 0, angle); // z√‡ »∏¿¸
     }
 
-    protected override void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if (godMode) return;
 
         if (isDead) return;
 
-        base.OnTriggerEnter2D(col);
 
         if (col.gameObject.CompareTag("Obstacle"))
         {

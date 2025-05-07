@@ -22,8 +22,6 @@ public class BgLooper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Triggerd: " + col.name);
-
         if (col.CompareTag("BackGround")) // 배경 재배치
         {
             float widtOfBgObject = ((BoxCollider2D)col).size.x; // 배경 사이즈 받아오기

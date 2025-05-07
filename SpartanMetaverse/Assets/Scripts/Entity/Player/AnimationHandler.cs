@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
-    private static readonly int IsMoving = UnityEngine.Animator.StringToHash("IsMove");
-    private static readonly int IsDamage = UnityEngine.Animator.StringToHash("IsDamage");
-    private static readonly int IsDie = UnityEngine.Animator.StringToHash("IsDie");
+    private static readonly int IsMoving = Animator.StringToHash("IsMove");
+    private static readonly int IsDamage = Animator.StringToHash("IsDamage");
+    private static readonly int IsDie = Animator.StringToHash("IsDie");
 
     public Animator playerAnimator;
     public Animator vehicleAnimator;

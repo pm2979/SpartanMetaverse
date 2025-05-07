@@ -10,7 +10,8 @@ public class BlockBase : MonoBehaviour
     public void TakeDamage()
     {
         coin.GetComponent<Rigidbody2D>().gravityScale = 0.1f;
-        
+       
+
         hp -= 1;
 
         if (hp == 0) StartCoroutine(Die());
@@ -20,8 +21,12 @@ public class BlockBase : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
         
-        Instantiate(coin, transform.position, Quaternion.identity);
-        
+        if(Random.value < 0.5f)
+        {
+            Instantiate(coin, transform.position, Quaternion.identity);
+        }
+
+        this.GetComponentInParent<BlockSpawnController>().blocks -= 1;
         Destroy(gameObject);
     }
 

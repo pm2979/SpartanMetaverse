@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class MiniGamePlayer_2 : BaseController
 {
+    [SerializeField] private float jumpHeight = 1f;
+    [SerializeField] private float jumpDuration = 0.4f;
+    private bool isJump;
+    
     private Camera _camera;
     private StatHandler statHandler;
-    bool isJump = false;
 
     float deathCooldown = 0f;
     public bool isDead = false;
@@ -21,28 +24,28 @@ public class MiniGamePlayer_2 : BaseController
         statHandler = GetComponent<StatHandler>();
 
         playerPos = transform.position;
+        isJump = true;
     }
 
     protected override void Update()
     {
-        if (!isDead)
+        if (!isDead && isJump == true)
         {
             HandleAction();
             Rotate(lookDirection);
+
+            Movement(MovementDirection);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                StartCoroutine(Jump());
+            }
         }
     }
 
     protected override void FixedUpdate()
     {
-        if (chracterRenderer != null)
-        {
-            Movement(MovementDirection);
 
-            if (Input.GetKey(KeyCode.Space) && isJump == true)
-            {
-                Jump();
-            }
-        }
     }
 
     protected override void HandleAction()
@@ -79,14 +82,32 @@ public class MiniGamePlayer_2 : BaseController
             animationHandler.Move(direction, AnimatorType.Player); // Move 애니메이션
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
-        if (isJump == true)
-        {
-            rb.velocity = Vector2.up * 5;
+        isJump = false;
+        Vector3 startPos = transform.position;
+        Vector3 peakPos = startPos + Vector3.up * jumpHeight;
 
-            isJump = false;
+        // 상승
+        float _jumpDuration = 0f;
+        while (_jumpDuration < jumpDuration)
+        {
+            transform.position = Vector3.Lerp(startPos, peakPos, _jumpDuration / jumpDuration);
+            _jumpDuration += Time.deltaTime;
+            yield return null;
         }
+
+        // 하강
+        _jumpDuration = 0f;
+        while (_jumpDuration < jumpDuration)
+        {
+            transform.position = Vector3.Lerp(peakPos, startPos, _jumpDuration / jumpDuration);
+            _jumpDuration += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = startPos; // 오차 보정
+        isJump = true;
     }
 
     protected override void OnTriggerEnter2D(Collider2D col)
@@ -102,11 +123,6 @@ public class MiniGamePlayer_2 : BaseController
         {
             isJump = false;
             return;
-        }
-
-        if (col.gameObject.CompareTag("Ground") && isJump == false)
-        {
-            isJump = true;
         }
     }
 }

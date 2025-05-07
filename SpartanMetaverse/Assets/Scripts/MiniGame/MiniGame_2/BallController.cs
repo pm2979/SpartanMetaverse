@@ -19,14 +19,13 @@ public class BallController : MonoBehaviour
 
     private void Start()
     {
-        ballDirection = Vector2.up.normalized; // 공의 초기 이동 방향
+        ballDirection = Vector2.up; // 공의 초기 이동 방향
     }
 
     private void Update()
     {
         transform.Translate(ballDirection * ballSpeed * Time.deltaTime);
     }
-
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -36,19 +35,16 @@ public class BallController : MonoBehaviour
         }
         else if(col.gameObject.CompareTag("Player"))
         {
-            float hitPoint = col.contacts[0].point.x;
-            float paddleCenter = col.transform.position.x;
-            float angle = (hitPoint - paddleCenter) * 2.0f;
-
-            ballDirection = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)).normalized;
+            ballDirection = Vector2.Reflect(ballDirection, col.contacts[0].normal);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Block"))
+        else if (col.gameObject.CompareTag("Block"))
         {
+            ballDirection = Vector2.Reflect(ballDirection, col.contacts[0].normal);
             col.gameObject.GetComponent<BlockBase>().TakeDamage();
+        }
+        else if(col.gameObject.CompareTag("Ground"))
+        {
+            MiniGameManager.Instance.GameOver();
         }
     }
 }

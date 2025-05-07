@@ -6,12 +6,14 @@ public class PlayerSkinController : MonoBehaviour
 {
     BaseController playerController;
     AnimationHandler animationHandler;
+    RidingController ridingController;
 
     string currentKey;
     [SerializeField] private GameObject playerPrefab;
 
     private void Awake()
     {
+        ridingController = GetComponent<RidingController>();
         playerController = GetComponent<BaseController>();
         animationHandler = GetComponent<AnimationHandler>();
 
@@ -28,6 +30,11 @@ public class PlayerSkinController : MonoBehaviour
         playerPrefab = Resources.Load<GameObject>($"Prefabs/{key}");
         GameObject _playerPrefab = Instantiate(playerPrefab);
         _playerPrefab.transform.SetParent(transform, worldPositionStays: false);
+        
+        if(ridingController.IsRide == true)
+        {
+            _playerPrefab.transform.localPosition = new Vector3(0, 1);
+        }
 
         playerController.chracterRenderer = _playerPrefab.GetComponent<SpriteRenderer>(); // 프리팹의 SpriteRenderer 할당
         animationHandler.playerAnimator = _playerPrefab.GetComponent<Animator>(); // 프리팹의 Animator 할당

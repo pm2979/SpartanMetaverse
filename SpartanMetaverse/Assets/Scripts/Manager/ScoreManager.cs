@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
+    [SerializeField] private string highScore;
+
     public int Score { get; private set; }
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI currentScoreText;
@@ -28,11 +29,11 @@ public class ScoreManager : Singleton<ScoreManager>
 
     public void SaveHighScore()
     {
-        int bestScore = PlayerPrefs.GetInt("HighScore", 0); // 저장된 최고 점수 불러오기
+        int bestScore = PlayerPrefs.GetInt(highScore, 0); // 저장된 최고 점수 불러오기
 
         if (Score > bestScore)
         {
-            PlayerPrefs.SetInt("HighScore", Score); // 최고 점수 갱신
+            PlayerPrefs.SetInt(highScore, Score); // 최고 점수 갱신
             PlayerPrefs.Save(); // 즉시 저장
         }
 
@@ -42,7 +43,7 @@ public class ScoreManager : Singleton<ScoreManager>
     private void ScoreText()
     {
         currentScoreText.text = Score.ToString();
-        bestScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+        bestScoreText.text = PlayerPrefs.GetInt(highScore, 0).ToString();
     }
 
 }

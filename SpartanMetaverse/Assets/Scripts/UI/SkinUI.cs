@@ -30,7 +30,7 @@ public class SkinUI : BaseUI
 
     public void OnClickSkinChange(TextMeshProUGUI texts)
     {
-        playerImg.sprite = playerSkinController.ChangeSkin(texts.text.ToString());  
+        playerImg.sprite = playerSkinController.ChangeSkin(texts.text.ToString());
     }
 
     public void OnClickExit()

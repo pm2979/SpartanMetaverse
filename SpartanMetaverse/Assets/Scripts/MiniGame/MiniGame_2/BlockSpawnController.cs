@@ -11,9 +11,19 @@ public class BlockSpawnController : MonoBehaviour
     [SerializeField] private int row; // За
     [SerializeField] private int col; // ї­
 
+    public int blocks;
+
     private void Start()
     {
         CreateBlocks();
+    }
+
+    private void Update()
+    {
+        if(blocks == 0)
+        {
+            CreateBlocks();
+        }
     }
 
     private void CreateBlocks()
@@ -26,5 +36,7 @@ public class BlockSpawnController : MonoBehaviour
                 _block.transform.parent = transform;
             }
         }
+
+        blocks = this.GetComponentsInChildren<BlockBase>().Length;
     }
 }
